@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<title>Update User</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+	integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+	crossorigin="anonymous">
+<link rel="stylesheet"
+	href="https://use.fontawesome.com/releases/v5.4.1/css/all.css"
+	integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz"
+	crossorigin="anonymous">
+</head>
+<body>
+	<div class="container my-5">
+	<h3> Update Contact</h3>
+		<div class="card">
+			<div class="card-body">
+				<div class="col-md-8">
+					<form action="#"
+						th:action="@{/contacts/update/{id}(id=${contact.id})}"
+						th:object="${contact}" method="post">
+						<div class="row">
+							<div class="form-group col-md-8">
+								<label for="name" class="col-form-label">Nombre</label> <input
+									type="text" th:field="*{name}" class="form-control" id="name"
+									placeholder="Nombre"> <span
+									th:if="${#fields.hasErrors('name')}" th:errors="*{name}"
+									class="text-danger"></span>
+							</div>
+							<div class="form-group col-md-8">
+								<label for="surname" class="col-form-label">Apellido</label> <input
+									type="text" th:field="*{surname}" class="form-control" id="surname"
+									placeholder="apellido"> <span
+									th:if="${#fields.hasErrors('surname')}" th:errors="*{surname}"
+									class="text-danger"></span>
+							</div>
+							<div class="form-group col-md-8">
+								<label for="type" class="col-form-label">Tipo</label>
+								<select th:field="*{type}" id="type" placeholder="tipo" name="type">
+									<option th:each="TypeContact : ${TypeContacts}" th:text="${TypeContact.name}" th:value="${TypeContact}" th:selected="${type==TypeContact}"></option>
+
+								</select>
+								<span
+										th:if="${#fields.hasErrors('type')}" th:errors="*{type}"
+										class="text-danger"></span>
+							</div>
+							<div class="form-group col-md-8">
+								<label for="information" class="col-form-label">Informacion</label> <input
+									type="text" th:field="*{information}" class="form-control"
+									id="information" placeholder="informacion"> <span
+									th:if="${#fields.hasErrors('information')}" th:errors="*{information}"
+									class="text-danger"></span>
+							</div>
+
+							<div class="form-group col-md-8">
+								<label for="description" class="col-form-label">Descripcion</label> <input
+									type="text" th:field="*{description}" class="form-control"
+									id="description" placeholder="descripcion"> <span
+									th:if="${#fields.hasErrors('description')}" th:errors="*{description}"
+									class="text-danger"></span>
+							</div>
+
+
+							<div class="col-md-6">
+								<input type="submit" class="btn btn-primary" value="Actualizar Contacto">
+								<input type="submit" class="btn btn-primary" value="Cancelar" th:formaction="@{/contacts/cancelar}">
+							</div>
+
+							<div class="form-group col-md-8"></div>
+
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>
